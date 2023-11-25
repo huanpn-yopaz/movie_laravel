@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cate;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+
 class CateAdminController extends Controller
 {
     /**
@@ -14,8 +14,9 @@ class CateAdminController extends Controller
      */
     public function index()
     {
-        $cate=Cate::inRandomOrder()->get();
-        return view('admin.cate.index',compact('cate'));
+        $cate = Cate::latest('id_cate')->get();
+
+        return view('admin.cate.index', compact('cate'));
     }
 
     /**
@@ -31,9 +32,10 @@ class CateAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $cate=$request->all();
-        $cate['slug_cate']=Str::slug($cate['name_cate']);
+        $cate = $request->all();
+        $cate['slug_cate'] = Str::slug($cate['name_cate']);
         Cate::create($cate);
+
         return back();
     }
 
@@ -50,8 +52,9 @@ class CateAdminController extends Controller
      */
     public function edit(string $id)
     {
-        $cate=Cate::find($id);
-        return view('admin.cate.edit',compact('cate'));
+        $cate = Cate::find($id);
+
+        return view('admin.cate.edit', compact('cate'));
     }
 
     /**
@@ -59,10 +62,11 @@ class CateAdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $cate=Cate::find($id);
-        $data=$request->all();
-        $data['slug_cate']=Str::slug($data['name_cate']);
+        $cate = Cate::find($id);
+        $data = $request->all();
+        $data['slug_cate'] = Str::slug($data['name_cate']);
         $cate->update($data);
+
         return back();
     }
 
@@ -72,6 +76,7 @@ class CateAdminController extends Controller
     public function destroy(string $id)
     {
         Cate::find($id)->delete();
+
         return back();
     }
 }

@@ -71,6 +71,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ url('admin/deletecate') }}">
+                    <i class='bx bxs-shopping-bag-alt'></i>
+                    <span class="text">Danh muc delete</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ Route('cate.create') }}">
                     <i class='bx bxs-doughnut-chart'></i>
                     <span class="text">Thêm Danh muc</span>

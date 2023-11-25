@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cate;
-use App\Models\Genre;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
@@ -14,7 +13,7 @@ class CateController extends Controller
      */
     public function index()
     {
-       abort(404);
+        abort(404);
     }
 
     /**
@@ -38,17 +37,17 @@ class CateController extends Controller
      */
     public function show(string $slug)
     {
-        $slug=Cate::where('slug_cate',$slug)->first();
+        $slug = Cate::where('slug_cate', $slug)->first();
         if ($slug) {
-            $name_cate=$slug->name_cate;
-            $id_cate=$slug->id_cate;
-            $same=Movie::select('id_movie','img_movie','name_movie','slug_movie','id_cate')->with('cate')->where('id_cate',$id_cate)->get();
-            return view('page.cate',compact('same','name_cate'));
+            $name_cate = $slug->name_cate;
+            $id_cate = $slug->id_cate;
+            $same = Movie::select('id_movie', 'img_movie', 'name_movie', 'slug_movie', 'id_cate')->with('cate')->where('id_cate', $id_cate)->get();
+
+            return view('page.cate', compact('same', 'name_cate'));
         } else {
-           abort(404);
+            abort(404);
         }
-        
-        
+
     }
 
     /**

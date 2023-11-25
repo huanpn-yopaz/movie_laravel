@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('img_movie');
             $table->text('video_movie');
             $table->text('people_movie');
-            $table->string('point',30);
-            $table->string('time',30);
+            $table->string('point', 30);
+            $table->string('time', 30);
             $table->text('slug_movie')->unique();
             $table->integer('status_movie');
             $table->integer('id_cate');

@@ -44,8 +44,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-       $user=User::find($id);
-       return view('admin.user.edit',compact('user'));
+        $user = User::find($id);
+
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -56,25 +57,28 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|max:35',
             'email' => 'required|email|unique:users,email,'.$id,
-           
+
         ], [
             'name.required' => 'Không được bỏ trống',
             'name.max' => 'Nhỏ hơn 35 kí tự',
             'email.required' => 'Không được bỏ trống',
             'email.unique' => 'Email đã được sử dụng',
-            'email.email' => 'Sai định dạng Email'
+            'email.email' => 'Sai định dạng Email',
         ]);
-        $user=User::find($id);
+        $user = User::find($id);
         $user->update($request->all());
+
         return back();
     }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        $user=User::find($id);
+        $user = User::find($id);
         $user->delete();
+
         return back();
     }
 }

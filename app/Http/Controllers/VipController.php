@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cate;
-use App\Models\Genre;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
@@ -38,10 +36,11 @@ class VipController extends Controller
      */
     public function show(string $slug)
     {
-        $movie=Movie::with('cate')->where('slug_movie',$slug)->first();
-        $id_cate=$movie->id_cate;
-        $same=Movie::select('id_movie','img_movie','name_movie','slug_movie','id_cate')->with('cate')->where('id_cate',$id_cate)->get();
-        return view('page.movie',compact('movie','same'));
+        $movie = Movie::with('cate')->where('slug_movie', $slug)->first();
+        $id_cate = $movie->id_cate;
+        $same = Movie::select('id_movie', 'img_movie', 'name_movie', 'slug_movie', 'id_cate')->with('cate')->where('id_cate', $id_cate)->get();
+
+        return view('page.movie', compact('movie', 'same'));
     }
 
     /**

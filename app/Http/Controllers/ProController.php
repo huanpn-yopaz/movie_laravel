@@ -14,6 +14,7 @@ class ProController extends Controller
     public function index()
     {
         $pro = Pro::latest()->get();
+
         return view('admin.pro.index', compact('pro'));
     }
 
@@ -34,14 +35,15 @@ class ProController extends Controller
 
         if ($save_img_pro = $request->file('img_pro')) {
             $destinationPath = 'public/images';
-            $img_pro = date('YmdHis') . "." . $save_img_pro->getClientOriginalExtension();
+            $img_pro = date('YmdHis').'.'.$save_img_pro->getClientOriginalExtension();
             $save_img_pro->storeAs($destinationPath, $img_pro);
             $data['img_pro'] = $img_pro;
         }
 
         Pro::create($data);
+
         return response()->json([
-            "status" => 200
+            'status' => 200,
         ]);
     }
 
@@ -52,6 +54,7 @@ class ProController extends Controller
     {
         $id = $request->id;
         $pro = Pro::find($id);
+
         return response()->json($pro);
     }
 
@@ -92,13 +95,14 @@ class ProController extends Controller
 
         if ($save_img_pro = $request->file('img_pro')) {
             $destinationPath = 'public/images';
-            $img_pro =  date('YmdHis') . "." . $save_img_pro->getClientOriginalExtension();
+            $img_pro = date('YmdHis').'.'.$save_img_pro->getClientOriginalExtension();
             $save_img_pro->storeAs($destinationPath, $img_pro);
             $data['img_pro'] = $img_pro;
-            Storage::delete('public/images/' . $pro->img_pro);
+            Storage::delete('public/images/'.$pro->img_pro);
         }
-         $pro->update($data);
-         return response()->json([
+        $pro->update($data);
+
+        return response()->json([
             'status' => 200,
         ]);
     }
@@ -111,11 +115,12 @@ class ProController extends Controller
         $id = $request->id;
         $pro = Pro::find($id);
         if (isset($pro->img_pro)) {
-            Storage::delete('public/images/' . $pro->img_pro);
+            Storage::delete('public/images/'.$pro->img_pro);
         }
         $pro->delete();
+
         return response()->json([
-            "status" => 200
+            'status' => 200,
         ]);
     }
 }

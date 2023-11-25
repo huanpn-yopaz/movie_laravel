@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+
 class VipMiddleware
 {
     /**
@@ -15,11 +16,11 @@ class VipMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role=='2' || Auth::check() && Auth::user()->role=='1') {
+        if (Auth::check() && Auth::user()->role == '2' || Auth::check() && Auth::user()->role == '1') {
             return $next($request);
-        }
-        else{
+        } else {
             toastr()->warning('Nâng cấp Vip để xem');
+
             return back();
         }
     }

@@ -1,19 +1,50 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Visitor;
-use Carbon\Carbon;
+use App\Http\Controllers\Controller;
+use App\Models\Cate;
 use Illuminate\Http\Request;
 
-class VisitorController extends Controller
+class CateDeleteController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+
+        $cate = Cate::onlyTrashed()->get();
+
+        return view('admin.cate.delete', compact('cate'));
+    }
+
+    public function restore(string $id)
+    {
+        Cate::withTrashed()->where('id_cate', $id)->restore();
+
+        return back();
+    }
+
+    public function delete_at(string $id)
+    {
+        Cate::withTrashed()->where('id_cate', $id)->forceDelete();
+
+        return back();
+    }
+
+    public function restore_all()
+    {
+        Cate::withTrashed()->restore();
+
+        return back();
+    }
+
+    public function delete_all()
+    {
+        Cate::onlyTrashed()->forceDelete();
+
+        return back();
     }
 
     /**
@@ -27,16 +58,9 @@ class VisitorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function viewer(Request $request)
+    public function store(Request $request)
     {
-        $ip = $request->ip();
-        $count_visitor = Visitor::where('ip_visitor', $ip)->get()->count();
-        if ($count_visitor < 1) {
-            $visitor = new Visitor();
-            $visitor->ip_visitor = $ip;
-            $visitor->date_visitor = Carbon::now();
-            $visitor->save();
-        }
+        //
     }
 
     /**

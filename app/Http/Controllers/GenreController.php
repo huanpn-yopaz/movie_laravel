@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cate;
 use App\Models\Genre;
 use App\Models\Movie;
 use App\Models\Movie_Genre;
@@ -15,8 +14,8 @@ class GenreController extends Controller
      */
     public function index()
     {
-        
-       abort(404);
+
+        abort(404);
     }
 
     /**
@@ -40,22 +39,22 @@ class GenreController extends Controller
      */
     public function show(string $slug)
     {
-        $slug=Genre::where('slug_genre',$slug)->first();
+        $slug = Genre::where('slug_genre', $slug)->first();
         if ($slug) {
-            $id_genre=$slug->id_genre;
-        $name_genre=$slug->name_genre;
-        $movie_genre=Movie_Genre::where('id_genre',$id_genre)->get();
-        $many_genre=[];
-        foreach ($movie_genre as $value) {
-            $many_genre[]=$value->id_movie;
-        }
-        $movie=Movie::inRandomOrder()->select('id_movie','img_movie','name_movie','slug_movie','id_cate')->with('movie_genre')->whereIn('id_movie',$many_genre)->get();
-        return view('page.genre',compact('movie','name_genre'));
+            $id_genre = $slug->id_genre;
+            $name_genre = $slug->name_genre;
+            $movie_genre = Movie_Genre::where('id_genre', $id_genre)->get();
+            $many_genre = [];
+            foreach ($movie_genre as $value) {
+                $many_genre[] = $value->id_movie;
+            }
+            $movie = Movie::inRandomOrder()->select('id_movie', 'img_movie', 'name_movie', 'slug_movie', 'id_cate')->with('movie_genre')->whereIn('id_movie', $many_genre)->get();
+
+            return view('page.genre', compact('movie', 'name_genre'));
         } else {
-           abort(404);
+            abort(404);
         }
-        
-        
+
     }
 
     /**

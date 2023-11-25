@@ -1,19 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\Visitor;
-use Carbon\Carbon;
+use App\Http\Controllers\Controller;
+use App\Models\Cate;
 use Illuminate\Http\Request;
 
-class VisitorController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $cate = Cate::get();
+
+        return response()->json([
+            'data' => $cate,
+        ]);
     }
 
     /**
@@ -27,16 +31,9 @@ class VisitorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function viewer(Request $request)
+    public function store(Request $request)
     {
-        $ip = $request->ip();
-        $count_visitor = Visitor::where('ip_visitor', $ip)->get()->count();
-        if ($count_visitor < 1) {
-            $visitor = new Visitor();
-            $visitor->ip_visitor = $ip;
-            $visitor->date_visitor = Carbon::now();
-            $visitor->save();
-        }
+        //
     }
 
     /**

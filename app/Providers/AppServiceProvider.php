@@ -6,10 +6,9 @@ use App\Models\Cate;
 use App\Models\Genre;
 use App\Models\Visitor;
 use Carbon\Carbon;
-use Flasher\Laravel\Http\Request;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
         Carbon::setLocale('vi');
-        View::composer('app', function ($view) { 
+        View::composer('app', function ($view) {
             $cate = Cate::withCount('movie')->get();
             $genre = Genre::withCount('movie_genre')->latest()->get();
             $view->with(compact('cate', 'genre'));

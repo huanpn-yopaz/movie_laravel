@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Models\User;
 use App\Models\Visitor;
-use App\Models\Zoom;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -16,13 +13,13 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        $ip=$request->ip();
-        $count_visitor=Visitor::where('ip_visitor',$ip)->get()->count();
-        $user=User::latest('id')->get();
-        $count_user=User::count();
-        return view('admin.dashboard')->with(compact('user','count_user','count_visitor'));
+        $ip = $request->ip();
+        $count_visitor = Visitor::where('ip_visitor', $ip)->get()->count();
+        $user = User::latest('id')->get();
+        $count_user = User::count();
+
+        return view('admin.dashboard')->with(compact('user', 'count_user', 'count_visitor'));
     }
-    
 
     /**
      * Show the form for creating a new resource.
@@ -53,7 +50,7 @@ class DashboardController extends Controller
      */
     public function edit(string $id)
     {
-        
+
     }
 
     /**
