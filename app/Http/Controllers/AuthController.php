@@ -73,11 +73,11 @@ class AuthController extends Controller
         $user = $request->all();
         $email = User::create($user)->email;
         if (isset($email)) {
-            $data = [
-                'email' => $email,
-            ];
-            dispatch(new MailerJob($data));
-            // Mail::to($email)->send(new Mailer);
+            // $data = [
+            //     'email' => $email,
+            // ];
+            // dispatch(new MailerJob($data));
+             Mail::to($email)->send(new Mailer);
         }
 
         return redirect('dang-nhap');

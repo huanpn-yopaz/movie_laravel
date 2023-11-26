@@ -12,6 +12,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('quenmatkhau', [ResetPasswordController::class, 'forget']);
+Route::post('forget-password', [ResetPasswordController::class, 'sendMail']);
+Route::get('reset-password/{token}/{email}', [ResetPasswordController::class, 'reset']);
+Route::post('submitreset', [ResetPasswordController::class, 'submitreset']);
+
+
 
 Route::get('dang-nhap', [AuthController::class, 'login']);
 Route::get('dang-ki', [AuthController::class, 'register']);

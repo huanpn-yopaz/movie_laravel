@@ -4,7 +4,7 @@
 @extends('app')
 @section('content')
 <div class="animated-form">
-    <form action="{{url('check_login')}}" method="post" class="form" autocomplete="off">
+    <form action="{{url('check_login')}}" method="post" class="form">
       @csrf
        <div class="title">Laravel</div>
        <div class="subtitle">Đăng nhập</div>
@@ -28,6 +28,7 @@
         @error('password')
        <div class="error_input">{{$message}}</div>
        @enderror
+       <a href="{{url('quenmatkhau')}}">forget pass</a>
        <button type="submit" class="submit">Đăng nhập</button>
       
     </form>
