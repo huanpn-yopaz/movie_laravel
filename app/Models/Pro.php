@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pro extends Model
 {
-    protected $fillable = ['name_pro', 'img_pro'];
+    protected $fillable = ['name_pro', 'img_pro','slug'];
 
     protected $table = 'pro';
 

@@ -52,6 +52,7 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('admin/pro', ProController::class);
     Route::post('delete_pro', [ProController::class, 'delete_pro']);
     Route::get('show_pro', [ProController::class, 'show_pro']);
+    Route::get('fetch_pro', [ProController::class, 'fetch_pro']);
     Route::post('update_pro', [ProController::class, 'update_pro']);
 
 });

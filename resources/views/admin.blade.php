@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -16,6 +17,9 @@
     <title>Admin</title>
 </head>
 <style>
+    .error-help-block{
+        color: red;
+    }
     .tags-input-wrapper {
         background: transparent;
         padding: 3px;
@@ -146,116 +150,9 @@
         @yield('content')
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-
-
-        $("#add_employee_form").submit(function(e) {
-            e.preventDefault();
-            var fd = new FormData(this);
-
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('pro.store') }}',
-                data: fd,
-                cache: false,
-                contentType: false,
-                processData: false,
-                dataType: 'json',
-                success: (response) => {
-                    console.log(response);
-                    if (response.status == 200) {
-                        $("#add_employee_form")[0].reset();
-                        $("#model_add").modal('hide');
-                        $('.table').load(location.href + ' .table')
-                        swal("Good job!", "You clicked the button!", "success");
-
-                    }
-
-                }
-            })
-        })
-
-        // delete
-        $("#delete_pro").click(function(e) {
-            let id = $(this).data('id');
-            e.preventDefault();
-            
-            $.ajax({
-                method: 'POST',
-                url: '{{ url('delete_pro') }}',
-                data: {
-                    id: id
-                },
-
-                success: (response) => {
-
-                    if (response.status == 200) {
-                        $('.table').load(location.href + ' .table')
-                        swal("Good job!", "You clicked the button!", "success");
-
-                    }
-
-                }
-            })
-        })
-        // show
-        $(document).on('click', '#show', function(e) {
-            e.preventDefault();
-            let id = $(this).data('id');
-            $.ajax({
-                url: '{{ url('show_pro') }}',
-                method: 'get',
-                data: {
-                    id: id,
-                },
-                success: function(response) {
-                    console.log(response)
-                    const link_img = 'http://localhost/movie/storage/images/'
-                    $(".img_render").html(`<img src="${link_img}${response.img_pro}" alt="">`);
-                    $(".id_pro").val(response.id_pro);
-                    $(".name_pro").val(response.name_pro);
-                    $(".img_pro").val(response.img_pro);
-                    //    update
-
-
-
-                }
-            });
-        });
-
-        // update
-        $("#edit_employee_form").submit(function(e) {
-            e.preventDefault();
-            const fd = new FormData(this);
-
-            $.ajax({
-                url: '{{ url('update_pro') }}',
-                method: 'post',
-                data: fd,
-                cache: false,
-                contentType: false,
-                processData: false,
-                dataType: 'json',
-                success: function(response) {
-                    if (response.status == 200) {
-                        // $("#edit_employee_form")[0].reset();
-                        $("#model_update").modal('hide');
-                        $('.table').load(location.href + ' .table')
-                        
-                        swal("Good job!", "You clicked the button!", "success");
-                    }
-
-                }
-            });
-        });
-    </script>
+    <script type="text/javascript" src="{{asset('js/jsvalidation.js')}}"></script>
+   {!! JsValidator::formRequest('App\Http\Requests\TestRequest') !!}
+    @stack('script')
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
