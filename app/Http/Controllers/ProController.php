@@ -64,10 +64,9 @@ class ProController extends Controller
     {
         $data = $request->all();
         $data['slug']=Str::slug($request->name_pro);
-        if ($save_img_pro = $request->file('img_pro')) {
-            $destinationPath = 'public/images';
-            $img_pro = date('YmdHis').'.'.$save_img_pro->getClientOriginalExtension();
-            $save_img_pro->storeAs($destinationPath, $img_pro);
+        if ($file = $request->file('img_pro')) {
+            $img_pro = date('YmdHis').'.'.$file->getClientOriginalExtension();
+            Storage::putFileAs('public/images',$file,$img_pro);
             $data['img_pro'] = $img_pro;
         }
 

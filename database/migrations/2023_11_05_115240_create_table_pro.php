@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_pro');
             $table->string('name_pro');
             $table->string('img_pro');
-
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
