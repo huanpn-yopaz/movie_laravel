@@ -1,0 +1,3 @@
+'images' => collect($this->images)->map(fn ($child) => [
+                'path' => $child['path'],
+            ])
