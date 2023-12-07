@@ -1,3 +1,10 @@
 'images' => collect($this->images)->map(fn ($child) => [
                 'path' => $child['path'],
             ])
+$(document).ajaxStart(function () {
+            $('#loader').addClass('loader')
+        })
+        $(document).ajaxStop(function () {
+            $('#loader').removeClass('loader')
+        })
+ <div id="loader"></div>
