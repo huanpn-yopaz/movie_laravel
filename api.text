@@ -8,3 +8,6 @@ $(document).ajaxStart(function () {
             $('#loader').removeClass('loader')
         })
  <div id="loader"></div>
+  if (error) {
+  $("#error_concentration_update").html(error.responseJSON.errors.name);
+             }
