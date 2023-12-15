@@ -15,3 +15,13 @@ $(document).ajaxStart(function () {
 https://youtu.be/IxKl1r8DLYM?feature=shared
 https://youtu.be/dou97k3rbfg?feature=shared
 self::withoutWrapping();
+
+
+$image = collect($this['images'])->first();
+
+        return [
+            'id' => $this['id'],
+            'name' => $this['name'],
+            'slug' => $this['slug'],
+            'image' => $this['images'] ? $image['path'] : null,
+        ];
