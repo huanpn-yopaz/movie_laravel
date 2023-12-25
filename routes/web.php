@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DetailMovieController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MovieController;
@@ -73,6 +74,4 @@ Route::get('tu-khoa/{tag}', [HomeController::class, 'tag']);
 Route::resource('chi-tiet-phim', DetailMovieController::class);
 Route::resource('danh-muc', CateController::class);
 Route::resource('the-loai', GenreController::class);
-Route::middleware(['minifile'])->group(function () {
-    Route::resource('notfound', NotfoundController::class);
-});
+Route::get('event', [EventController::class, 'index']);
