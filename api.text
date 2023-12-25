@@ -1,0 +1,27 @@
+'images' => collect($this->images)->map(fn ($child) => [
+                'path' => $child['path'],
+            ])
+$(document).ajaxStart(function () {
+            $('#loader').addClass('loader')
+        })
+        $(document).ajaxStop(function () {
+            $('#loader').removeClass('loader')
+        })
+ <div id="loader"></div>
+  if (error) {
+  $("#error_concentration_update").html(error.responseJSON.errors.name);
+             }
+
+https://youtu.be/IxKl1r8DLYM?feature=shared
+https://youtu.be/dou97k3rbfg?feature=shared
+self::withoutWrapping();
+
+
+$image = collect($this['images'])->first();
+
+        return [
+            'id' => $this['id'],
+            'name' => $this['name'],
+            'slug' => $this['slug'],
+            'image' => $this['images'] ? $image['path'] : null,
+        ];
