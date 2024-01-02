@@ -1,3 +1,4 @@
+ $table->foreignId('article_id')->constrained('articles', 'id');
 'images' => collect($this->images)->map(fn ($child) => [
                 'path' => $child['path'],
             ])
