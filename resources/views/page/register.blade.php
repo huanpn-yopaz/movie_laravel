@@ -4,7 +4,7 @@
 @extends('app')
 @section('content')
 <div class="animated-form">
-    <form action="{{url('check_register')}}" method="post" class="form" autocomplete="off">
+    <form action="{{url('check_register')}}" method="post" class="form">
       @csrf
        <div class="title">Laravel</div>
        <div class="subtitle">Tạo tài khoản xem phim</div>

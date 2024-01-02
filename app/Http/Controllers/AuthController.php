@@ -77,7 +77,19 @@ class AuthController extends Controller
             //     'email' => $email,
             // ];
             // dispatch(new MailerJob($data));
-             Mail::to($email)->send(new Mailer);
+            //  Mail::to($email)->send(new Mailer($email));
+            // $data=[
+            //     'email'=>$email,
+            // ];
+            // Mail::to($email)->send(new Mailer($data));
+            $data = [
+                'email' => $email,
+            ];
+                Mail::send('mailer.mail', $data, function ($mesage) use ($data) {
+                    $mesage->to($data['email']);
+                    $mesage->subject('Coupon Code');
+                });
+            
         }
 
         return redirect('dang-nhap');

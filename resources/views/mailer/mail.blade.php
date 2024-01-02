@@ -7,6 +7,7 @@
     <title>Mailer</title>
 </head>
 <body>
+    <p>{{$email}}</p>
    <p><b>Website Laravel demo nhà tuyển dụng</b></p>
    <p><b>Coder by Phạm Như Huấn</b></p>
    <p>Chúc mừng bạn đã đăng kí thành công tài khoản để xem phim với chức năng:</p>
