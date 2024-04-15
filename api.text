@@ -1,4 +1,5 @@
  $table->foreignId('article_id')->constrained('articles', 'id');
+ 'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($this->get('id'))],
 'images' => collect($this->images)->map(fn ($child) => [
                 'path' => $child['path'],
             ])
